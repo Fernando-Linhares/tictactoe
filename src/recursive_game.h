@@ -10,7 +10,12 @@ int game(vector<Rows> data, User player1, Boot player2, Cordenates cordenate, in
 
     Builder builder;
 
-    // system("clear");
+   system("clear");
+
+    if(builder.finalGame(data)){
+        cout << builder.finalFrame(data) << endl;
+        return 0;
+    }
 
     cout << builder.render(data) << endl;
 
@@ -48,11 +53,11 @@ int game(vector<Rows> data, User player1, Boot player2, Cordenates cordenate, in
 
     cordenate.setColumn(column);
 
-    vector<Rows> data_modified = player1.play(data, cordenate);
+    vector<Rows> data_modified_by_player1 = player1.play(data, cordenate);
 
-    //data = player2.play(data);
+    vector<Rows> data_modified_by_player2 = player2.play(data_modified_by_player1);
 
-    game(data_modified, player1, player2, cordenate, turn + 1);
+    game(data_modified_by_player2, player1, player2, cordenate, turn + 1);
 
     return 0;
 }
